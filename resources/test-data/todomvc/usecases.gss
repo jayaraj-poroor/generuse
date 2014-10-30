@@ -1,0 +1,94 @@
+[	group	todomvc		]
+[	usecase	open-browser	desc: "Open browser window"	]
+[	pre-condition	browser is-not-shown?		]
+[	actors	user	system	]
+		open browser.	show browser.	
+				
+[	usecase	open-site	desc: "Open website"	]
+[	pre-condition	address-bar is-ready?		]
+[	actors	user	system	]
+		input address-bar with: site-url.	show todomvc-page.	
+				
+[	usecase	new-todo	 desc: "New TODO item"	]
+[	pre-condition	todomvc-page is-shown?		]
+[	actors	user	system	]
+		input todomvc-page's new-todo with: new-todo-text;		
+		enter todomvc-page's new-todo.		
+[	branch	address-bar has-all-or-active-view-url?		]
+			show todomvc-page's todo-list's last-item's title with: new-todo-text;	
+			save-in-store new-todo-text.	
+[	branch	address-bar has-completed-view-url?		]
+			save-in-store new-todo-text.	
+				
+[	usecase	edit-todo	 desc: "Edit TODO item"	]
+[	pre-condition	todomvc-page's todo-list is-not-empty?		]
+[	actors	user	system	]
+		pick-any todomvc-page's todo-list giving todo-item;		
+		double-click todo-item's title.	show todo-item's editor.	
+		input todo-item's editor with: edited-todo-text;		
+		enter todo-item's editor.	show todo-item's title with: edited-todo-text.	
+				
+[	usecase	complete-todo	 desc: "Complete TODO item"	]
+[	pre-condition	todomvc-page's todo-list is-not-empty?		]
+[	actors	user	system	]
+		pick-any todomvc-page's todo-list giving todo-item.	let todo-item's completed be completed.	
+		click todo-item's completed.	update todomvc-page's remaining-count.	
+[	branch	is not completed		]
+[	do	todo-becomes-completed with todo-item		]
+[	branch	let otherwise		]
+[	do	todo-becomes-active with todo-item		]
+				
+[	usecase	todo-becomes-completed	todo-item	]
+[	actors		system	]
+[	branch	address-bar has-active-view-url?		]
+			remove todo-item.	
+[	branch	is otherwise		]
+			select todo-item's completed;	
+			show todo-item's title with text-decoration: "line-through".	
+				
+[	usecase	todo-becomes-active	todo-item	]
+[	actors		system	]
+[	branch	address-bar has-completed-view-url?		]
+			remove todo-item.	
+[	branch	is otherwise		]
+			unselect todo-item's completed;	
+			show todo-item's title with text-decoration: "none".	
+				
+[	usecase	view-completed	 desc: "View completed items"	]
+[	pre-condition	local-storage is-not-empty?		]
+[	actors	user	system	]
+		click todomvc-page's view-selection's completed.	show todomvc-page's view-selection's completed with font-weight: bold;	
+			pick local-storage with: todo-key giving todo-items;	
+			pick todo-items with completed: true giving completed-items;	
+			show todomvc-page's todo-list with: completed-items, text-decoration: "line-through".	
+
+[	usecase	clear-completed	desc: "Clear all completed items"	]
+[	pre-condition	local-storage has-completed-items?		]
+[	actors	user	system	]
+		click todomvc-page's clear-completed.	
+		clear-completed-in todomvc-page;	
+		clear-completed-in local-storage.	
+			
+[	usecase	remove-todo	 desc: "Remove TODO item"	]
+[	pre-condition	todomvc-page's todo-list is-not-empty?		]
+[	actors	user	system	]
+		pick-any todomvc-page's todo-list giving todo-item;		
+		mouse-over todo-item.	show todo-item's remove.	
+		click todo-item's remove.	remove todo-item;	
+			remove-from-store todo-item.	
+				
+[	usecase	view-active	 desc: "View active items"	]
+[	pre-condition	local-storage is-not-empty?		]
+[	actors	user	system	]
+		click todomvc-page's view-selection's active.	show todomvc-page's view-selection's active with font-weight: bold;	
+			pick local-storage with: todo-key giving todo-items;	
+			pick todo-items with completed: false giving active-items;	
+			show todomvc-page's todo-list with: active-items.	
+				
+[	usecase	view-all	 desc: "View all items"	]
+[	pre-condition	local-storage is-not-empty?		]
+[	actors	user	system	]
+		click todomvc-page's view-selection's all.	show todomvc-page's view-selection's all with font-weight: bold;	
+			pick local-storage with: todo-key giving todo-items;	
+			show todomvc-page's todo-list with: todo-items.	
+				

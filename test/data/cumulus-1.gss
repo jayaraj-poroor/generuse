@@ -1,0 +1,34 @@
+[	group tests		]
+[	usecase	register		]
+[	pre-condition	home-page is-shown?		]
+[	actors	user	system	]
+		pick-any valid-new-user giving new-user;		
+		input home-page's new-user with: new-user.		
+		click home-page's signup.		
+		[branch already-signedup? new-user's email]		
+			show home-page's email-exists-message.	
+		[branch let otherwise]		
+			show console-page; 	
+			show console-page's user-info's email with: new-user's email;	
+			save new-user.	
+				
+				
+[	usecase	signin		]
+[	pre-condition	home-page is-shown?		]
+[	actors	user	system	]
+		pick-any existing-user giving user;		
+		input home-page's credentials with: user;		
+		click home-page's signin.	show console-page;	
+			show console-page's user-info's email with: user's email.	
+			
+[action	already-signedup?		]
+[object	email	register: new-user's email	]
+	pick users with email: email giving matching-users.		
+	empty? matching-users.		
+			
+[action	save		]
+[object	user	register: new-user	]
+	pick existing-user with email: user's email fullname: user's fullname giving matching-users.		
+	empty? matching-users giving user-exists.		
+	insert existing-user with user (if user exists).		
+	let user-exists be result.		

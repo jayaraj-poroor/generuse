@@ -1,0 +1,8 @@
+[group temp]
+[	usecase	register	desc:"Register a new user"]
+[	actors	user	system	]
+pick-any valid-new-user giving user;
+log "user's email: " + user's email.
+let 3 be x.
+let x / 4 be y.
+log y.

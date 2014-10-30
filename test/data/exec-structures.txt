@@ -1,0 +1,163 @@
+usecases [usecase]
+
+
+usecase : { :commands  [{statement} {statement} ] :_actors [] :_precondition statement (with "_pre" as actor) }
+
+command{
+   :kind (:stmt :branch :use)
+   :template - if template
+   :stmt - if stmt or branch
+}
+statement: {
+   actor: "user"
+   action: "pick"
+   target: ["global" "my-todo-item" "text"]
+   result: ["local" "some-text"]
+}
+
+{
+   actor: "user"
+   action: "input"
+   target: ["global "todo-page" "new-item-box"]
+   params: {"with" {id: "uc-local" child:{id: "some-text"}} }
+}
+
+{
+   actor: "system"
+   action: "take-10th"
+   target: {:type "objref" :value ["global" "todo-page" "all-items"] :lexpr nil :rexpr nil}
+   params: {"position" "last" }
+   result: ["local" "last-item"]
+}
+
+if "take-10th" is not found then system looks for "take" with embedded parameter set.
+
+{
+   actor: "system"
+   action: "show"
+   target: {:_type "id" :_ref ["local" "last-item" "text"] :_left nil :_right nil}
+   params: {"with" ["local" "some-text"]}
+}
+
+{  actor: "system"
+   action: "insert"
+   target: ["global" "items-memory]
+   params: {"row" ["local" "last-item"]}
+}
+
+{:_type "op" :_value "+" :_left {:_type "int" :_value 1 } :_right {:_type "int" :_value 2 } }
+
+1 + table
+
+1 + (to_int table)
+
+heap:
+{
+   "global" : {:type: "heap" :todo-page {:type "web_page" :value {} }  :items-memory  {:type "sql_table" :value {} }
+     :login-page {:type "web_html" :_value {} :credentials : {:type "html@web" :_value{} } }
+   }
+   "local" : {:_type "ns" :last-item {:_type "html@web"  :_value {} }}   
+}
+
+
+heap
+ref {
+"global" ref {
+:type "heap"
+"address-bar" ref {:type web_address-bar}
+"plain-login-view" ref {:type web_page}
+"choose-accounts-view" ref {:type web_page}
+"maindb" ref {:type "sql_db" :implementation "hsql://..." :value nil}
+}
+}
+
+}
+(alter ((heap "global") "plain-login-view") assoc :value "new-value") 
+-----------------------------------------------
+
+data {
+:a {:b {:c "d" :e "f"} :x {} }
+:y {}
+}
+
+data ref {
+:a ref {:b ref {:c ref "d" :e ref "f"} :x ref {} }
+:y ref {}
+}
+
+(ref-set (:c (:b (:a @data))) "de")
+
+
+active-usecases {"usecase1" true "usecase2" true}
+
+
+transactions - 
+
+action function: actuator
+actuators have access to heap
+
+axon[target-eval context globals param-evals &rest] 
+returns {:type :value}.
+params; {:type :value} or {:type :heap-obj :objref ... :heap-obj {:type "xxx" :value ....}}
+
+context: {:actor "user" ... :usecase : "" :action "xxx"}
+params :{}
+
+alternative
+
+actuator[self-type-value params] 
+returns {:_return type-value :_self type-value  :_globals {}  :_globals_remove [] }.
+
+
+object : {:_type : "" value: ...}
+object : {type: "web:address-bar" value: ... }
+
+casting actuators
+constructor actuators
+destructor actuators
+evaluate actuator 
+id implicitly means (evaluate id)
+
+action function axon 
+
+registered-axons:
+{
+"type/op"  {}
+"web_address-bar/input" {:axon #fun} 
+"web_page/to-table" (:axon #fun}
+}
+
+if web:page/to-table is not found then web:/to-table is tried
+
+axon params: {"web-site" "url"}
+
+returns {type: "" value: ""}
+
+let 3 * 4 be some-value.
+
+expressions: let form.
+
+look for a registered operation on object type with parameters.
+
+let 3*4+5 be s.
+
+
+condp = (:exec-mode curr-locals)
+
+nil
+	:stmt execute 
+	:branch if branch condition is satisfied set :exec-mode to branched else :exec-mode to skip
+skip 
+    :stmt don't execute
+    :branch if branch condition is satisfied set :exec-mode to branched else :exec-mode to skip 
+stop:
+    stmt don't execute
+    branch don't execute	
+branched
+     :stmt execute
+     :branch set :exec-mode to stop 	 
+
+	 
+delegate usecases (delegates)
+
+

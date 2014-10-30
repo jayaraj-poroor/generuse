@@ -1,0 +1,54 @@
+[group cumulus]
+[	usecase	open-browser		desc: "Open browser window"]
+[	pre-condition	browser is-not-shown?		]
+[	actors	user	system	]
+open browser.	
+show browser.	
+			
+				
+[	usecase	open-site		desc: "Open website"]
+[	pre-condition	address-bar is-ready?		]
+[	actors	user	system	]
+input address-bar with: site-url.	
+show signin-page.	
+
+[	usecase	signin		desc: "Sign in"]
+[	pre-condition	signin-page is-shown?		]
+[	actors	user	system	]
+		let "jayaraj.poroor@gmail.com" be email;
+		let "amma" be password;
+		input signin-page's credentials with email, password;
+		click signin-page's credentials's signin.
+		show console-page.
+		
+[	usecase	register		desc: "Register new user"]
+[	pre-condition	signin-page is-shown?		]
+[	actors	user	system	]
+		pick-any valid-new-user giving user;
+		#input signin-page's new-user with: user;
+		#input signin-page's new-user with email: user's email, password: user's password, password-confirm: user's password-confirm;
+		input signin-page's new-user with user's email user's password user's password-confirm;
+		#input signin-page's new-user's password-confirm with: user's password-confirm.
+		click signin-page's new-user's signup.
+		show console-page.
+		log "console page shown!".
+
+[	usecase	signout		desc: "Sign out"]
+[	pre-condition	console-page is-shown?		]
+[	actors	user	system	]
+click console-page's signout.
+show signin-page.
+		
+[action	is-not-shown?		]
+[object	browser	open-browser:browser	]
+	is-shown? browser giving is-shown.		
+	let not is-shown be result.		
+			
+[action	is-ready?		]
+[object	address-bar	open-site:address-bar	]
+	is-shown? browser giving browser-is-shown.
+	read address-bar if: browser-is-shown giving url.
+	log "url : " + url.
+	let "?" if: not browser-is-shown be url.	
+	let  (url = "about:blank") or (url = "data:,") be result.		
+	

@@ -1,0 +1,12 @@
+object,type,value,timeout,driver
+signin-page,web_html,browser,
+console-page,web_html,browser,
+otherwise,boolean,TRUE,
+site-url,string,"http://console.generuse.com",
+browser2,web_browser,chrome,10,E:\generuse-project\misc\chromedriver_win32\chromedriver.exe
+browser,web_browser,firefox,10,
+address-bar,web_address-bar,browser,
+test-db,db_sql, jdbc:mysql://localhost/cumulus-test?user=root&password=,
+main-db,db_sql, ,
+valid-new-user,sql_table,test-db:valid_new_user,
+existing-user, sql_table, main-db:users

@@ -1,0 +1,43 @@
+group TODO MVC.
+
+usecase: Edit TODO (if todo mvc page's todo list is not empty).
+		[system] shows the job description page of the job.
+		shows the job view's job list with all jobs as content and paginated view.
+        removes the todo item from the store (if some condition).
+		let the todo mvc page's todo list be the todo list.
+		inputs the todo list with todo text.
+        inputs the login page's credentials with user's email, and user's password;		
+		clicks on the submit button.
+		shows the home page.
+		
+		double clicks on a todo item.	
+		shows the todo item's editor.	
+		inputs the todo item's editor with edited todo text;		
+		presses enter in the todo item's editor.	
+		shows the todo item's title with edited todo text.	
+				
+usecase:	Complete TODO.
+		clicks a todo item's completed button (if something).	
+		updates the todo mvc page's remaining count.
+		complete the todo item (if the todo item's completed checkbox was not checked before clicking on it).
+		activate the todo item (otherwise).
+
+action:	removes the todo item from the store (in remove todo on todo item, in some other todo on todo item).
+		pick from the local storage with todo key giving todo items;		
+		count the todo items whose title is todo title before removal, and action is something's else giving todo count;
+		display the todo items with line through as first param name and something else as second param.
+		count the todo items giving total count (repeat 3 times).		
+		todo count before removal = todo count + 1 and x = y + 1 must hold.		
+		total count after removal = total count + 1 must hold.
+		compute levenstein distance of the counter.
+
+		LevensteinDistance.compute(counter);
+		
+data: user's some thing.
+pick up an object;
+throw away the object.
+
+state: before removal (before	clicking on the target button		 in remove todo).
+		pick the local storage with todo key giving todo items;			
+		read the todo item's title giving todo title.			
+					

@@ -1,0 +1,8 @@
+[usecase,additem,,]
+[actors,user,system,]
+[pre-condition,todo-page's all-items is-shown? ,,]
+,pick some-todo-item's text giving some-text; ,,
+,input todo-page's new-item-box with: some-text.,,
+,,take-nth all-item with position: "last" giving last-item; ,
+,,show  last-item's text with: some-text;,
+,,insert items-memory with row: last-item.,

@@ -1,0 +1,83 @@
+[	group	todomvc		]
+				
+[	action	has-completed-items?		]
+[	object	local-storage	clear-completed:local-storage	]
+		pick local-storage with: todo-key giving todo-items.		
+		pick todo-items with completed is true giving completed-items.		
+		count completed-items giving completed-count.		
+		let completed-count > 0.		
+				
+[	action	clear-completed-in	desc: "Clear completed items in $target"	]
+[	object	todo-page 	clear-completed:todomvc-page	]
+		remove todomvc-page's completed-count;		
+		let todomvc-page's todo-list be todo-list;		
+		count todo-list with completed is true giving completed-list-count;		
+		must-be completed-list-count = 0.		
+				
+[	action	clear-completed-in	desc: "Clear completed items in $target"	]
+[	object	local-storage	clear-completed:local-storage	]
+		pick local-storage with todo-key giving todo-items;		
+		pick todo-items with completed is true giving completed-items;		
+		count completed-items giving completed-items-count;		
+		must-be completed-items-count = 0.		
+				
+[	action	has-completed-view-url?		]
+[	object	address-bar	new-todo: address-bar  todo-becomes-completed: address-bar  todo-becomes-active: address-bar	]
+		read address-bar giving url.		
+		ends url with "completed".		
+				
+[	action	has-active-view-url?		]
+[	object	address-bar	new-todo: address-bar  todo-becomes-completed: address-bar  todo-becomes-active: address-bar	]
+		read address-bar giving url.		
+		ends url with: "active".		
+				
+[	action	has-all-or-active-view-url?		]
+[	object	address-bar	new-todo: address-bar todo-becomes-completed: address-bar todo-becomes-active: address-bar	]
+		read address-bar giving url.		
+		ends url with "completed" giving is-completed.		
+		let not is-completed be result.		
+				
+[	action	is-not-empty?		]
+[	object	todo-list	remove-todo:todomvc-page's todo-list  complete-todo:todomvc-page's todo-list  view-completed:todomvc-page's todo-list  edit-todo:todomvc-page's todo-list	]
+		is-shown? todo-list's first giving result.		
+				
+[	action	is-not-empty?		]
+[	object	local-storage	view-completed:local-storage  view-active:local-storage  view-all:local-storage clear-completed:local-storage	]
+		pick local-storage with todo-key giving todo-items.		
+		count todo-items giving total-count.		
+		let total-count > 0.		
+				
+[	action	remove-from-store	 desc: "Removes $target from store"	]
+[	object	todo-item	remove-todo: todo-item	]
+		pick local-storage with: todo-key giving todo-items;		
+		count todo-items with title: before-removal's todo-title giving todo-count;		
+		count todo-items giving total-count.		
+		must-be before-removal's todo-count = todo-count + 1.		
+		must-be before-removal's total-count = total-count + 1.		
+				
+[	action	save-in-store	desc:"Saves $target in store"	]
+[	object	todo-text	new-todo:new-todo-text	]
+		pick local-storage with todo-key giving todo-items;		
+		let todo-items's last be last-item;		
+		must-be last-item's title = todo-text.		
+				
+[	action	update		]
+[	object	remaining-count	complete-todo:todomvc-page's remaining-count	]
+		pick local-storage with todo-key giving todo-items;		
+		count todo-items with completed is false giving active-count.		
+		read remaining-count giving count-shown.		
+		let active-count  = count-shown.		
+				
+[	action	is-not-shown?		]
+[	object	browser	open-browser:browser	]
+		is-shown? browser giving is-shown.		
+		let not is-shown be result.		
+				
+[	action	ready?		]
+[	object	address bar	open site:address bar	]
+		browser is shown? giving browser shown.		
+		read the address bar giving url (if browser is shown).		
+		read something (repeat 3 times).
+		log "url : " + url.		
+		let "?" if not browser shown be url.		
+		let  (url = "about:blank") or (url = "data:,") be result.		

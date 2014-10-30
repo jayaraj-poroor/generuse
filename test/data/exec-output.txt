@@ -1,0 +1,519 @@
+{:usecases
+ [{:name "open-browser",
+   :group "test",
+   :attribs {"priority" "high", "status" "complete"},
+   :pre-cond-stmt
+   {:action "let",
+    :result-id nil,
+    :params nil,
+    :target
+    {:kind :op,
+     :value ">",
+     :lexpr
+     {:kind :objref,
+      :value ["count"],
+      :src
+      {:start
+       {:file "test/data/test-0.gss",
+        :char-pos 19,
+        :line 3,
+        :text "count"},
+       :end
+       {:file "test/data/test-0.gss",
+        :char-pos 19,
+        :line 3,
+        :text "count"}}},
+     :rexpr {:kind :literal, :type :int, :value 0},
+     :src
+     {:start
+      {:file "test/data/test-0.gss",
+       :char-pos 19,
+       :line 3,
+       :text "count"},
+      :end
+      {:file "test/data/test-0.gss",
+       :char-pos 27,
+       :line 3,
+       :text "0"}}},
+    :src
+    {:start
+     {:file "test/data/test-0.gss",
+      :char-pos 15,
+      :line 3,
+      :text "let"},
+     :end
+     {:file "test/data/test-0.gss",
+      :char-pos 27,
+      :line 3,
+      :text "0"}}},
+   :actors ["user" "system"],
+   :cmds
+   [{:kind :stmt,
+     :stmt
+     {:action "let",
+      :result-id "y",
+      :params nil,
+      :target
+      {:kind :op,
+       :value "+",
+       :lexpr
+       {:kind :objref,
+        :value ["count"],
+        :src
+        {:start
+         {:file "test/data/test-0.gss",
+          :char-pos 4,
+          :line 5,
+          :text "count"},
+         :end
+         {:file "test/data/test-0.gss",
+          :char-pos 4,
+          :line 5,
+          :text "count"}}},
+       :rexpr {:kind :literal, :type :int, :value 1},
+       :src
+       {:start
+        {:file "test/data/test-0.gss",
+         :char-pos 4,
+         :line 5,
+         :text "count"},
+        :end
+        {:file "test/data/test-0.gss",
+         :char-pos 12,
+         :line 5,
+         :text "1"}}},
+      :src
+      {:start
+       {:file "test/data/test-0.gss",
+        :char-pos 0,
+        :line 5,
+        :text "let"},
+       :end
+       {:file "test/data/test-0.gss",
+        :char-pos 17,
+        :line 5,
+        :text "y"}}}}
+    {:kind :period}
+    {:kind :stmt,
+     :stmt
+     {:action "update!",
+      :result-id nil,
+      :params
+      {:with
+       {:kind :objref,
+        :value ["y"],
+        :src
+        {:start
+         {:file "test/data/test-0.gss",
+          :char-pos 19,
+          :line 6,
+          :text "y"},
+         :end
+         {:file "test/data/test-0.gss",
+          :char-pos 19,
+          :line 6,
+          :text "y"}}}},
+      :target
+      {:kind :objref,
+       :value ["count"],
+       :src
+       {:start
+        {:file "test/data/test-0.gss",
+         :char-pos 8,
+         :line 6,
+         :text "count"},
+        :end
+        {:file "test/data/test-0.gss",
+         :char-pos 8,
+         :line 6,
+         :text "count"}}},
+      :src
+      {:start
+       {:file "test/data/test-0.gss",
+        :char-pos 0,
+        :line 6,
+        :text "update!"},
+       :end
+       {:file "test/data/test-0.gss",
+        :char-pos 19,
+        :line 6,
+        :text "y"}}}}
+    {:kind :period}],
+   :src
+   {:start
+    {:file "test/data/test-0.gss", :char-pos 0, :line 2, :text "["},
+    :end
+    {:file "test/data/test-0.gss", :char-pos 20, :line 6, :text "."}}}
+  {:name "test-browser",
+   :group "test",
+   :attribs {"priority" "high", "status" "complete"},
+   :pre-cond-stmt
+   {:action "let",
+    :result-id nil,
+    :params nil,
+    :target
+    {:kind :op,
+     :value ">",
+     :lexpr
+     {:kind :objref,
+      :value ["count"],
+      :src
+      {:start
+       {:file "test/data/test-0.gss",
+        :char-pos 19,
+        :line 9,
+        :text "count"},
+       :end
+       {:file "test/data/test-0.gss",
+        :char-pos 19,
+        :line 9,
+        :text "count"}}},
+     :rexpr {:kind :literal, :type :int, :value 51},
+     :src
+     {:start
+      {:file "test/data/test-0.gss",
+       :char-pos 19,
+       :line 9,
+       :text "count"},
+      :end
+      {:file "test/data/test-0.gss",
+       :char-pos 27,
+       :line 9,
+       :text "51"}}},
+    :src
+    {:start
+     {:file "test/data/test-0.gss",
+      :char-pos 15,
+      :line 9,
+      :text "let"},
+     :end
+     {:file "test/data/test-0.gss",
+      :char-pos 27,
+      :line 9,
+      :text "51"}}},
+   :actors ["user" "system"],
+   :cmds
+   [{:kind :stmt,
+     :stmt
+     {:action "inc-by",
+      :result-id "z",
+      :params {"delta" {:kind :literal, :type :int, :value 10}},
+      :target
+      {:kind :objref,
+       :value ["count"],
+       :src
+       {:start
+        {:file "test/data/test-0.gss",
+         :char-pos 7,
+         :line 11,
+         :text "count"},
+        :end
+        {:file "test/data/test-0.gss",
+         :char-pos 7,
+         :line 11,
+         :text "count"}}},
+      :src
+      {:start
+       {:file "test/data/test-0.gss",
+        :char-pos 0,
+        :line 11,
+        :text "inc-by"},
+       :end
+       {:file "test/data/test-0.gss",
+        :char-pos 35,
+        :line 11,
+        :text "z"}}}}
+    {:kind :period}],
+   :src
+   {:start
+    {:file "test/data/test-0.gss", :char-pos 0, :line 8, :text "["},
+    :end
+    {:file "test/data/test-0.gss",
+     :char-pos 36,
+     :line 11,
+     :text "."}}}],
+ :usecaseps
+ {"test_call-me"
+  {:name "call-me",
+   :formal-params ["x"],
+   :group "test",
+   :attribs nil,
+   :cmds
+   [{:kind :stmt,
+     :stmt
+     {:action "let",
+      :result-id "y",
+      :params nil,
+      :target
+      {:kind :op,
+       :value "+",
+       :lexpr
+       {:kind :objref,
+        :value ["x"],
+        :src
+        {:start
+         {:file "test/data/test-0.gss",
+          :char-pos 4,
+          :line 14,
+          :text "x"},
+         :end
+         {:file "test/data/test-0.gss",
+          :char-pos 4,
+          :line 14,
+          :text "x"}}},
+       :rexpr {:kind :literal, :type :int, :value 1},
+       :src
+       {:start
+        {:file "test/data/test-0.gss",
+         :char-pos 4,
+         :line 14,
+         :text "x"},
+        :end
+        {:file "test/data/test-0.gss",
+         :char-pos 8,
+         :line 14,
+         :text "1"}}},
+      :src
+      {:start
+       {:file "test/data/test-0.gss",
+        :char-pos 0,
+        :line 14,
+        :text "let"},
+       :end
+       {:file "test/data/test-0.gss",
+        :char-pos 13,
+        :line 14,
+        :text "y"}}}}
+    {:kind :period}],
+   :src
+   {:start
+    {:file "test/data/test-0.gss", :char-pos 0, :line 13, :text "["},
+    :end
+    {:file "test/data/test-0.gss",
+     :char-pos 14,
+     :line 14,
+     :text "."}}}},
+ :states nil,
+ :actions
+ {"test_inc-by"
+  #{{:name "inc-by",
+     :group "test",
+     :formal-params ["delta"],
+     :stmt-cmds
+     [{:kind :stmt,
+       :stmt
+       {:action "let",
+        :result-id nil,
+        :params nil,
+        :target
+        {:kind :op,
+         :value "+",
+         :lexpr
+         {:kind :objref,
+          :value ["c"],
+          :src
+          {:start
+           {:file "test/data/test-0.gss",
+            :char-pos 4,
+            :line 18,
+            :text "c"},
+           :end
+           {:file "test/data/test-0.gss",
+            :char-pos 4,
+            :line 18,
+            :text "c"}}},
+         :rexpr
+         {:kind :objref,
+          :value ["delta"],
+          :src
+          {:start
+           {:file "test/data/test-0.gss",
+            :char-pos 8,
+            :line 18,
+            :text "delta"},
+           :end
+           {:file "test/data/test-0.gss",
+            :char-pos 8,
+            :line 18,
+            :text "delta"}}},
+         :src
+         {:start
+          {:file "test/data/test-0.gss",
+           :char-pos 4,
+           :line 18,
+           :text "c"},
+          :end
+          {:file "test/data/test-0.gss",
+           :char-pos 8,
+           :line 18,
+           :text "delta"}}},
+        :src
+        {:start
+         {:file "test/data/test-0.gss",
+          :char-pos 0,
+          :line 18,
+          :text "let"},
+         :end
+         {:file "test/data/test-0.gss",
+          :char-pos 8,
+          :line 18,
+          :text "delta"}}}}
+      {:kind :period}],
+     :object
+     {:name "c",
+      :contexts
+      {"test-browser"
+       {:kind :objref,
+        :value ["count"],
+        :src
+        {:start
+         {:file "test/data/test-0.gss",
+          :char-pos 23,
+          :line 17,
+          :text "count"},
+         :end
+         {:file "test/data/test-0.gss",
+          :char-pos 23,
+          :line 17,
+          :text "count"}}}}},
+     :src
+     {:start
+      {:file "test/data/test-0.gss", :char-pos 0, :line 16, :text "["},
+      :end
+      {:file "test/data/test-0.gss",
+       :char-pos 13,
+       :line 18,
+       :text "."}}}}},
+ :formulas nil,
+ :imports []}
+{"myenv"
+ #<Ref@39e8ddf5: 
+   {:value nil,
+    :tmp nil,
+    :implementation nil,
+    :type :sys_env,
+    :object "myenv",
+    :src
+    {:start
+     {:file "test/data/test-gso.csv",
+      :char-pos 0,
+      :line 9,
+      :text "myenv"}}}>,
+ "local-accounts"
+ #<Ref@384550d8: 
+   {:value nil,
+    :tmp "or db:table-name",
+    :implementation "maindb",
+    :type :sql_table,
+    :object "local-accounts",
+    :src
+    {:start
+     {:file "test/data/test-gso.csv",
+      :char-pos 0,
+      :line 6,
+      :text "local-accounts"}}}>,
+ "browser"
+ #<Ref@3385ed94: 
+   {:value nil,
+    :tmp "any \"browser\" extension",
+    :implementation "firefox explorer chrome",
+    :type :web_browser,
+    :object "browser",
+    :src
+    {:start
+     {:file "test/data/test-gso.csv",
+      :char-pos 0,
+      :line 8,
+      :text "browser"}}}>,
+ "plain-login-view"
+ #<Ref@25a32b76: 
+   {:value nil,
+    :tmp nil,
+    :implementation nil,
+    :type :web_page,
+    :object "plain-login-view",
+    :src
+    {:start
+     {:file "test/data/test-gso.csv",
+      :char-pos 0,
+      :line 3,
+      :text "plain-login-view"}}}>,
+ "clock"
+ #<Ref@4ffb45e8: 
+   {:value nil,
+    :tmp "provides delay, timestamping, datetime support",
+    :implementation nil,
+    :type :sys_clk,
+    :object "clock",
+    :src
+    {:start
+     {:file "test/data/test-gso.csv",
+      :char-pos 0,
+      :line 10,
+      :text "clock"}}}>,
+ "count"
+ #<Ref@b32fc98: 
+   {:value 50,
+    :tmp nil,
+    :implementation nil,
+    :type :int,
+    :object "count",
+    :src
+    {:start
+     {:file "test/data/test-gso.csv",
+      :char-pos 0,
+      :line 11,
+      :text "count"}}}>,
+ :type "heap",
+ "choose-accounts-view"
+ #<Ref@3f10a5ce: 
+   {:value nil,
+    :tmp nil,
+    :implementation nil,
+    :type :web_page,
+    :object "choose-accounts-view",
+    :src
+    {:start
+     {:file "test/data/test-gso.csv",
+      :char-pos 0,
+      :line 4,
+      :text "choose-accounts-view"}}}>,
+ "todo-page"
+ #<Ref@6ae5d994: 
+   {:value nil,
+    :tmp nil,
+    :implementation nil,
+    :type :web_page,
+    :object "todo-page",
+    :src
+    {:start
+     {:file "test/data/test-gso.csv",
+      :char-pos 0,
+      :line 5,
+      :text "todo-page"}}}>,
+ "maindb"
+ #<Ref@3018e693: 
+   {:value nil,
+    :tmp "connection string",
+    :implementation "hsql://..../",
+    :type :sql_db,
+    :object "maindb",
+    :src
+    {:start
+     {:file "test/data/test-gso.csv",
+      :char-pos 0,
+      :line 7,
+      :text "maindb"}}}>,
+ "address-bar"
+ #<Ref@4df8b6e0: 
+   {:value nil,
+    :tmp nil,
+    :implementation nil,
+    :type :web_address-bar,
+    :object "address-bar",
+    :src
+    {:start
+     {:file "test/data/test-gso.csv",
+      :char-pos 0,
+      :line 2,
+      :text "address-bar"}}}>}

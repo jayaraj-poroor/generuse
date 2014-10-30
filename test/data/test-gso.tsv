@@ -1,0 +1,10 @@
+object	type	implementation	any "browser" extension
+address-bar	web_address-bar		
+plain-login-view	web_page		
+choose-accounts-view	web_page		
+todo-page	web_page		
+local-accounts	sql_table	maindb	or db:table-name
+maindb	sql_db	hsql://..../	connection string
+browser	web_browser	firefox explorer chrome	any "browser" extension
+myenv	sys_env		
+clock	sys_clk		provides delay, timestamping, datetime support

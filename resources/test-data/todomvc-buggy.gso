@@ -1,0 +1,11 @@
+object,type,value,timeout,driver
+browser,web_browser,firefox,10,
+address-bar,web_address-bar,browser,,
+site-url,string,http://localhost:9090/angularjs-buggy,,
+todomvc-page,web_html,browser,,
+local-storage,web_local-storage,browser,,
+todo-key,string,todos-angularjs,,
+bold,string,700,,
+otherwise,boolean,TRUE,,
+new-todo-text,string,Generuse TODO Text,,
+edited-todo-text,string,Edited TODO Text,,

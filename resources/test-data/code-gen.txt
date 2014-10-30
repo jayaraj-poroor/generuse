@@ -1,0 +1,26 @@
+initial url -> initial view
+
+<div gs='todo page'>
+<label ...> <input type='textbox' gs='new_todo' id='new_todo'>
+<ul gs='todo_list'>
+..<..gs='todo_item'>
+</ul>
+</div>
+
+todoController:
+
+$('new_todo').enter(
+todo_text = $(this).val();
+if(not(having_completed_view_url()))
+{
+show(todo-text);
+save_in_store(todo-text);
+}else
+{
+save_in_store(todo_text);
+}
+
+);
+
+
+

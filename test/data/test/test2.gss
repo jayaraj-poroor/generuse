@@ -1,0 +1,24 @@
+[group test]
+
+[usecase start-inc3 priority:"high" status:"complete"]
+[actors user system]
+log "Additional usecase".
+
+[usecase inc-and-check2 v]
+[actors user system]
+let v + 1 be z.
+log "inc-and-check2: " + z.
+
+[action inc-by delta]
+[object c continue-inc:countx]
+inc-by2 c giving z;
+#let c + delta giving z;
+update! c with: z;
+log "c: " + c.
+
+
+[state before-inc usecase:start-incx]
+[needs y]
+let count be a.
+let count + 1 be b.
+ 

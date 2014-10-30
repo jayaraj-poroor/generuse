@@ -1,0 +1,65 @@
+[group todo]
+[import todolist from: "test"]
+
+[usecase remove-item]
+#[pre-condition show todo-page's completed-items]
+[pre-condition check todo-page's completed-items = true left: not(x + 3) right: 3 + y]
+[actors user system]
+[use remove-item with items:completed-items's something]
+
+[usecase select-item priority:"high" status:"complete"]
+[pre-condition todo-page's all-items is-shown?]
+[actors user system]
+select-any todo-page's all-items's checkbox giving todo-item.
+[branch todo-item is-active?]
+show  todo-item with checkbox: "inactive";
+update! items-memory with id: todo-item's id active: false giving update-done.
+[branch]
+show todo-item with checkbox: "active";
+update! items-memory with id: todo-item's id active: true.
+
+[usecase add-item]
+[pre-condition todo-page's all-items is-shown?]
+[actors user system]
+pick-any my-todo-item's text giving some-text;
+input todo-page's new-item-box with: some-text.
+take-nth todo-page's all-items with position: "last" giving last-item;
+show last-item's text with: some-text;
+insert items-memory with row: last-item.
+
+[usecase remove-item items]
+[actors user system]
+mouse-over-any items giving todo-item;
+show todo-item's remove-button.
+click todo-item's remove-button.
+remove todo-item;
+delete-from items-memory with id: todo-item's id. #let's see how it works
+
+[action move from to]
+[object todo-item select-item:todo-item]
+pick items-memory with active:true giving active-items;
+compute active-items with checkbox: check-active.
+
+[action move from to]
+[object todo-item select-item-1:todo-item]
+pick items-memory with active:true giving active-items;
+compute active-items with checkbox: check-active.
+
+[state before-change-role usecase:test]
+[needs from-role to-role]
+select user-roles role: from-role giving result;
+copy result.
+
+[state before-change-role usecase:testx]
+[needs from-role to-role]
+select user-roles role: from-role giving result;
+copy result.
+
+[state before-change-rolex usecase:test]
+[needs from-role to-role]
+select user-roles role: from-role giving result;
+copy result giving saved-data.
+
+[formula check-active active]
+if active = true then: "active" else: "completed".
+

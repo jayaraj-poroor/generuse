@@ -1,0 +1,8 @@
+object			,type				,value								,timeout		,driver
+browser			,web_browser		,firefox							,10				,
+address-bar		,web_address-bar	,browser							,				,
+site-url		,string				,http://localhost:9090/angularjs	,				,
+todomvc-page	,web_html			,browser							,				,
+local-storage   ,web_local-storage  ,browser 							,				,
+todo-key		,string				,todos-angularjs					,				,
+bold			,string				,700								, 				,

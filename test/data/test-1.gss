@@ -1,0 +1,22 @@
+[group test]
+[usecase open-browser]
+[pre-condition let count = 0]
+[actors user system]
+let count + 1 be z.
+update! count with: z.
+open browser.
+show browser.
+log "Browser in shown!".
+let count + 1 be zz.
+update! count with: zz.
+
+[usecase open-site]
+[pre-condition let count = 2]
+[actors user system]
+update count with count + 1 as the new value.
+log "Opening site.".
+input address-bar with: site-url.
+log "Site " + site-url + " is opened".
+log "this will print" (if count > 0).
+log "this won't print" (if count = 0).
+

@@ -1,0 +1,5 @@
+javac -cp ..\antlr-4.1-complete.jar -d classes src\grammar\*.java 
+
+jar cf classes\generuseparser.jar classes\org\generuse\parser\*.class
+
+mvn deploy:deploy-file -DgroupId=local -DartifactId=generuseparser -Dversion=0.1 -Dpackaging=jar -Dfile=classes\generuseparser.jar -Durl=file:repo

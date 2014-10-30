@@ -1,0 +1,34 @@
+signin
+register
+console is-shown? implies past success(signin)
+signout
+
+success(signin) implies eventually success(execute-usecase)
+
+fail(signin) implies not eventually execute-usecase.
+
+
+temporal property coverage
+
+
+[	usecase	register		desc: "Register new user"]
+[	pre-condition	signin-page is-shown?		]
+[	actors	user	system	]
+user pick-any valid-new-user implies eventually show console-page.
+
+
+		pick-any valid-new-user giving user;
+		#input signin-page's new-user with: user;
+		#input signin-page's new-user with email: user's email, password: user's password, password-confirm: user's password-confirm;
+		input signin-page's new-user with user's email user's password user's password-confirm;
+		#input signin-page's new-user's password-confirm with: user's password-confirm.
+		click signin-page's new-user's signup.
+		show console-page.
+		log "console page shown!".
+
+		usecase register
+		[user] * implies eventually [system] (show console-page or show signin-page)
+		register: always ([user] * implies <3s> [system] *) - performance
+		always([user] input at address-bar implies [system] display error-page)- security
+		
+		

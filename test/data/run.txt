@@ -1,0 +1,9 @@
+-g test/data/cumulus-2.gss -j test/data/cumulus-gso-2.csv -r 4 -p "test\data" -x 10 -c test\data\generuse.cfg
+
+-g test/data/todomvc-1.gss -j test/data/todomvc-1.gso -r 4 -p "test\data" -x 10 -c test\data\generuse.cfg
+
+generuse -g resources/test-data/todomvc.gss -j resources/test-data/todomvc.gso -r 10 -p "resources\test-data" -x 10 -c resources\test-data\generuse.cfg
+
+usecase coverage
+permutation coverage
+temporal coverage register .. exec-usecase (register implies eventually exec-usecase)

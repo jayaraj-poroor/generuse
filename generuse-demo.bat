@@ -1,0 +1,1 @@
+lein run -g resources/test-data/todomvc.gss -j resources/test-data/todomvc.gso -r 50 -p "resources\test-data" -x 10 -c resources\test-data\generuse-demo.cfg

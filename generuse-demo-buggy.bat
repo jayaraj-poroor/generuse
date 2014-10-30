@@ -1,0 +1,1 @@
+java -jar target\generuse-0.5.0-SNAPSHOT-standalone.jar -g resources/test-data/todomvc.gss -j resources/test-data/todomvc-buggy.gso -r 50 -p "resources\test-data" -x 10 -c resources\test-data\generuse-demo.cfg

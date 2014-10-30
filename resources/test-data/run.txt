@@ -1,0 +1,1 @@
+-g resources/test-data/todomvc-1.gss -j resources/test-data/todomvc-1.gso -r 4 -p "resources\test-data" -x 10 -c resources\test-data\generuse.cfg

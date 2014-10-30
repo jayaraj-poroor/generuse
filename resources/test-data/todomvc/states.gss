@@ -1,0 +1,7 @@
+[group todomvc]
+[	state	before-removal	 usecase:remove-todo	]
+[	needs	todo-item		]
+		pick local-storage with: todo-key giving todo-items;		
+		read todo-item's title giving todo-title.		
+		count todo-items with title: todo-title giving todo-count.		
+		count todo-items giving total-count.		

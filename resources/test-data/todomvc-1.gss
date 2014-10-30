@@ -1,0 +1,117 @@
+[group todomvc]
+[	usecase	open-browser		desc: "Open browser window"]
+[	pre-condition	browser is-not-shown?		]
+[	actors	user	system	]
+open browser.	
+show browser.	
+			
+				
+[	usecase	open-site		desc: "Open website"]
+[	pre-condition	address-bar is-ready?		]
+[	actors	user	system	]
+input address-bar with: site-url.	
+show todomvc-page.	
+
+[	usecase	new-todo desc: "New TODO item"]
+[	pre-condition	todomvc-page is-shown?		]
+[	actors	user	system	]
+let "Generuse TODO" be todo-text;
+input todomvc-page's new-todo with: todo-text;
+enter todomvc-page's new-todo.
+show todomvc-page's todo-list's last's title with: todo-text;
+save-in-store todo-text.
+
+[	usecase	new-todo2 desc: "New TODO item 2"]
+[	pre-condition	todomvc-page is-shown?		]
+[	actors	user	system	]
+let "Generuse TODO2" be todo-text;
+input todomvc-page's new-todo with: todo-text;
+enter todomvc-page's new-todo.
+show todomvc-page's todo-list's last's title with: todo-text;
+save-in-store todo-text.
+
+[ usecase complete-todo desc: "Complete TODO item"]
+[ pre-condition todomvc-page's todo-list is-not-empty?]
+[ actors user system]
+pick-any todomvc-page's todo-list giving todo-item;
+click todo-item's completed.
+select todo-item's completed;
+show todo-item's title with text-decoration: "line-through".
+
+[ usecase view-completed desc: "View completed items"]
+[ pre-condition local-storage is-not-empty?]
+[ actors user system]
+click todomvc-page's view-selection's completed.
+show todomvc-page's view-selection's completed with font-weight: bold;
+pick local-storage with: todo-key giving todo-items;
+pick todo-items with completed: true giving completed-items;
+show todomvc-page's todo-list with: completed-items text-decoration: "line-through".
+
+[ usecase remove-todo desc: "Remove TODO item"]
+[ pre-condition todomvc-page's todo-list is-not-empty?]
+[ actors user system]
+pick-any todomvc-page's todo-list giving todo-item;
+mouse-over todo-item.
+show todo-item's remove.
+click todo-item's remove.
+remove todo-item.
+remove-from-store todo-item.
+
+[ usecase view-active desc: "View active items"]
+[ pre-condition local-storage is-not-empty?]
+[ actors user system]
+click todomvc-page's view-selection's active.
+show todomvc-page's view-selection's active with font-weight: bold;
+pick local-storage with: todo-key giving todo-items;
+pick todo-items with completed: false giving active-items;
+show todomvc-page's todo-list with: active-items.
+
+[action is-not-empty?]
+[object todo-list remove-todo:todomvc-page's todo-list complete-todo:todomvc-page's todo-list view-completed:todomvc-page's todo-list]
+todo-list's first is-shown?.
+
+[action is-not-empty?]
+[object local-storage view-completed:local-storage view-active:local-storage]
+pick local-storage with: todo-key giving todo-items.
+count todo-items giving total-count.
+let total-count > 0.
+
+
+[state before-removal usecase:remove-todo]
+[needs todo-item]
+pick local-storage with: todo-key giving todo-items;
+read todo-item's title giving todo-title.
+count todo-items with title: todo-title giving todo-count.
+log "TODO title: " + todo-title;
+log "TODO ITEMS:" ;
+log todo-items;
+log "TODO-count: " + todo-count;
+count todo-items giving total-count.
+
+[action remove-from-store]
+[object todo-item remove-todo: todo-item]
+pick local-storage with: todo-key giving todo-items;
+count todo-items with title: before-removal's todo-title giving todo-count;
+count todo-items giving total-count.
+must-be before-removal's todo-count = todo-count + 1.
+must-be before-removal's total-count = total-count + 1.
+
+[action save-in-store]
+[object todo-text new-todo:todo-text new-todo2:todo-text]
+pick local-storage with: todo-key giving todo-items;
+let todo-items's last be last-item;
+must-be last-item's title = todo-text.
+
+[action	is-not-shown?		]
+[object	browser	open-browser:browser	]
+	is-shown? browser giving is-shown.		
+	let not is-shown be result.		
+			
+[action	is-ready?		]
+[object	address-bar	open-site:address-bar	]
+	is-shown? browser giving browser-is-shown.
+	read address-bar if: browser-is-shown giving url.
+	log "url : " + url.
+	let "?" if: not browser-is-shown be url.	
+	let  (url = "about:blank") or (url = "data:,") be result.		
+	

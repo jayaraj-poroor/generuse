@@ -1,0 +1,35 @@
+[usecase show subject marks]
+[actors user system]
+selects a subject from the subject list;
+shows the student list for the selected subject.
+
+
+[usecase show subject marks]
+[actors user system]
+selects a subject;
+shows the student list with the subject's students.
+
+[usecase remove students from a subject]
+[actors user system]
+clicks on a student row's select checkbox;
+clicks on the remove button.
+removes the student row;
+removes the student row from the store;
+shows the student removed message.
+
+
+
+
+[data subject]
+picks any item from the main page's subject giving result.
+picks the students whose subject is the subject giving students.
+
+[data subject] ; for generator
+
+#('#subject').on('select', function()
+{
+show('#student_list', subject.students)
+});
+
+
+
